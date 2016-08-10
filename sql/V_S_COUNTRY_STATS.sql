@@ -1,9 +1,9 @@
-create or replace view HR.V_S_COUNTRY_STATS as
+create or replace view REST_DATA.V_S_COUNTRY_STATS as
 select countrycode,
        year,
        val,
        val-lag(val) over (order by countrycode,year) as diff
-from s_country_stats 
+from rest_data.s_country_stats 
 unpivot include nulls
    ( val for( year ) in
       (  y1960 as '1960',
