@@ -1,3 +1,7 @@
+REM
+REM Run as SYS or INTERNAL
+REM
+set echo on
 DECLARE
   PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
@@ -12,3 +16,4 @@ BEGIN
 
 END;
 /
+set echo off
