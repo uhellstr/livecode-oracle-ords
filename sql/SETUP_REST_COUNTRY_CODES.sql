@@ -6,6 +6,10 @@
    
    http://localhost:8080/ords/pdbdemo/rest_data/countrystats/codes/
 
+   Example with a single database and no alias for dbname the uri looks like
+
+   http://localhost:8080/ords/rest_data/countrystats/codes/
+
 */ 
 
 BEGIN
