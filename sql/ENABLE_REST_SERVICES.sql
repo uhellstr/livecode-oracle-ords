@@ -2,8 +2,6 @@ REM
 REM Run as SYS or INTERNAL
 REM
 set echo on
-DECLARE
-  PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
 
     ORDS.ENABLE_SCHEMA(p_enabled => TRUE,
@@ -11,7 +9,7 @@ BEGIN
                        p_url_mapping_type => 'BASE_PATH',
                        p_url_mapping_pattern => 'rest_data',
                        p_auto_rest_auth => TRUE);
-    
+
     commit;
 
 END;
