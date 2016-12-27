@@ -2,7 +2,7 @@ create or replace package country_stats_pkg as
 
   procedure country_data
      (
-       p_in_country_code in varchar2 default null,
+       p_in_countryname in varchar2 default null,
        p_debug in char default 'N'
      );
 
@@ -17,7 +17,7 @@ create or replace package body country_stats_pkg as
 
   procedure country_data
      (
-       p_in_country_code in varchar2 default null,
+       p_in_countryname in varchar2 default null,
        p_debug in char default 'N'
      ) is
 
@@ -27,12 +27,12 @@ create or replace package body country_stats_pkg as
 
    open l_cursor for
    select
-     c.countrycode,
+     c.countryname,
      c.year,
      c.val,
      c.diff
   from v_s_country_stats c
-  where c.countrycode = decode(p_in_country_code,null,c.countrycode,p_in_country_code);
+  where c.countryname = decode(p_in_countryname,null,c.countryname,p_in_countryname);
 
   -- use p_debug if testing directly in sqlcl,sqlplus or sqldeveloper
   if p_debug = 'Y' then
@@ -63,7 +63,7 @@ create or replace package body country_stats_pkg as
     select countrycode,
            countryname
     from s_country_codes
-    order by countrycode asc;
+    order by countryname asc;
 
     -- use p_debug if testing directly in sqlcl,sqlplus or sqldeveloper
     if p_debug = 'Y' then
