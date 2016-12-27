@@ -12,7 +12,9 @@
 
    http://localhost:8888/ords/rest_data/testmodule/country/SWE
 
+   To get the codes and names for all countries in the database use
 
+   http://localhost:8888/ords/rest_data/testmodule/countrynames/
 */
 
 BEGIN
@@ -45,6 +47,17 @@ BEGIN
     p_source         => 'BEGIN country_stats_pkg.country_data(:code); END;',
     p_items_per_page => 0);
 
+    ORDS.define_template(
+     p_module_name    => 'testmodule',
+     p_pattern        => 'countrynames/');
+
+    ORDS.define_handler(
+      p_module_name    => 'testmodule',
+      p_pattern        => 'countrynames/',
+      p_method         => 'GET',
+      p_source_type    => ORDS.source_type_plsql,
+      p_source         => 'BEGIN country_stats_pkg.country_codes; END;',
+      p_items_per_page => 0);
   COMMIT;
 end;
 /
