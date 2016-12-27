@@ -1,9 +1,9 @@
 create or replace view REST_DATA.V_S_COUNTRY_STATS as
 select countrycode,
        year,
-       val,
-       val-lag(val) over (order by countrycode,year) as diff
-from rest_data.s_country_stats 
+       nvl(val,0) as val,
+       nvl(val-lag(val) over (order by countrycode,year),0) as diff
+from rest_data.s_country_stats
 unpivot include nulls
    ( val for( year ) in
       (  y1960 as '1960',
@@ -64,6 +64,6 @@ unpivot include nulls
          y2015 as '2015'
       )
     )
-order by 
+order by
 countrycode,
          year;
