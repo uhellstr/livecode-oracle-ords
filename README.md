@@ -10,3 +10,5 @@ This demonstration is based on following components installed.
 * Installed REST_DATA schema as provided with the sql scripts in this demo
 * Installed version of LiveCode 9.0-DP4 or higher to compile REST.livecode into a Javascript client.
 * Firefox/Safari or Chrome browser
+
+The Project is currently in developemnt. Expect some more detailed instructions on setup and usage in the first quarter of 2017.
