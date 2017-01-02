@@ -13,6 +13,7 @@ create or replace package country_stats_pkg as
 
 end country_stats_pkg;
 /
+
 create or replace package body country_stats_pkg as
 
   procedure country_data
@@ -31,7 +32,7 @@ create or replace package body country_stats_pkg as
      c.year,
      c.val,
      c.diff
-  from v_s_country_stats c
+  from v_rest_country_data c
   where c.countryname = decode(p_in_countryname,null,c.countryname,p_in_countryname);
 
   -- use p_debug if testing directly in sqlcl,sqlplus or sqldeveloper
