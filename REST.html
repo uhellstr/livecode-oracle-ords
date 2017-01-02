@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en-us">
   <head>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Emscripten-Generated Code</title>
@@ -244,7 +246,9 @@
 
 </script>
 
+    <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
     <script  type='text/javascript'>
+
         function countryNames() {
             var request = new XMLHttpRequest();
             request.open('GET', 'http://localhost:8888/ords/rest_data/testmodule/countrynames/', false);  // `false` makes the request synchronous
@@ -276,6 +280,38 @@
             return false;
         };
 
+        function plotter() {
+
+          var d3 = Plotly.d3;
+          var img_jpg= d3.select('#jpg-export');
+
+          // Ploting the Graph
+
+          var trace={x:[3,9,8,10,4,6,5],y:[5,7,6,7,8,9,8],type:"scatter"};
+          var trace1={x:[3,4,1,6,8,9,5],y:[4,2,5,2,1,7,3],type:"scatter"};
+          var data = [trace,trace1];
+          alert('Hello World');
+          var layout = {title : "Simple Javascript Graph"};
+          Plotly.plot(
+            'myDiv',
+             data,
+             layout)
+
+          // static image in jpg format
+
+          .then(
+              function(gd)
+               {
+                Plotly.toImage(gd,{height:300,width:300})
+                   .then(
+                      function(url)
+                   {
+                       img_jpg.attr("src", url);
+                       return Plotly.toImage(gd,{format:'jpeg',height:400,width:400});
+                   }
+                   )
+              });
+        };
 
     </script>
 
