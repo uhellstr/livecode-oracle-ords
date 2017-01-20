@@ -69,9 +69,9 @@ BEGIN
       p_module_name   => 'testmodule',
       p_pattern       => 'graph/:code',
       p_method        => 'GET',
-      p_source_type   => ORDS.source_type_query,
-      p_source        => 'SELECT country_graph_pkg.plotly_bar_graph(:code) FROM DUAL;'
-    );
+      p_source_type   => ords.source_type_query,
+      p_source        => 'SELECT country_graph_pkg.plotly_bar_graph(:code) FROM DUAL',
+      p_items_per_page => 0);
 
   COMMIT;
 
