@@ -18,6 +18,7 @@
 */
 
 BEGIN
+
   ORDS.define_module(
     p_module_name    => 'testmodule',
     p_base_path      => 'testmodule/',
@@ -58,6 +59,21 @@ BEGIN
       p_source_type    => ORDS.source_type_plsql,
       p_source         => 'BEGIN country_stats_pkg.country_codes; END;',
       p_items_per_page => 0);
+
+    ORDS.define_template(
+      p_module_name   => 'testmodule',
+      p_pattern       => 'graph/:code'
+    );
+
+    ORDS.define_handler(
+      p_module_name   => 'testmodule',
+      p_pattern       => 'graph/:code',
+      p_method        => 'GET',
+      p_source_type   => ORDS.source_type_query,
+      p_source        => 'SELECT country_graph_pkg.plotly_bar_graph(:code) FROM DUAL;'
+    );
+
   COMMIT;
+
 end;
 /
