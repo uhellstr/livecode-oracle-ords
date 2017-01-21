@@ -3,6 +3,9 @@
    http://<node>:portno/ords/[<dbname>]/<rest_schema_name>/testmodule/country/[<code>]
 
    Parameters witin [] are optional depending on setup....
+   
+   In all examples we use localhost as node and port 8888 is a forwarding port
+   thru firewall. Node and portno may be different in your setup.
 
    Example with a single database and no alias for dbname the uri looks like
 
@@ -10,11 +13,16 @@
 
    or for a specific country
 
-   http://localhost:8888/ords/rest_data/testmodule/country/SWE
+   http://localhost:8888/ords/rest_data/testmodule/country/Sweden
 
    To get the codes and names for all countries in the database use
 
    http://localhost:8888/ords/rest_data/testmodule/countrynames/
+   
+   Finally: To get JSON payload for generating data for plotly.js
+   
+   http://localhost:8888/ords/rest_data/testmodule/graph/Sweden
+
 */
 
 BEGIN
