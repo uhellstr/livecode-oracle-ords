@@ -1,6 +1,6 @@
 OPTIONS (ERRORS=50)
 LOAD DATA 
-INFILE '/Users/uhellstr/S_COUNTRY_FLAGS_DATA_TABLE.ldr' "str '{EOL}'"
+INFILE '/home/uhellstr/github/livecode.jsontest.oracleapex/sql/S_COUNTRY_FLAGS_DATA_TABLE.ldr' "str '{EOL}'"
 APPEND
 CONTINUEIF NEXT(1:1) = '#'
 INTO TABLE "REST_DATA"."S_COUNTRY_FLAGS"
