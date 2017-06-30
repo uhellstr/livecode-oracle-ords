@@ -33,7 +33,8 @@ create or replace package body country_stats_pkg as
      c.val,
      c.diff
   from v_rest_country_data c
-  where c.countryname = decode(p_in_countryname,null,c.countryname,p_in_countryname);
+  where c.countryname = decode(p_in_countryname,null,c.countryname,p_in_countryname)
+    and c.year < 2015;
 
   -- use p_debug if testing directly in sqlcl,sqlplus or sqldeveloper
   if p_debug = 'Y' then
