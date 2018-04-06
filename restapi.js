@@ -4,7 +4,8 @@
 <script  type='text/javascript'>
     function countryNames() {
         var request = new XMLHttpRequest();
-        request.open('GET', 'http://localhost:8888/ords/rest_data/testmodule/countrynames/', false);  // `false` makes the request synchronous
+        var tURL = "http://localhost:8888/ords/orclpdb1/apex/rest_data/testmodule/countrynames/";
+        request.open('GET', tURL, false);  // `false` makes the request synchronous
         request.send(null);
 
         //alert(request.responseText);
@@ -19,7 +20,7 @@
 
     function countryData(pCountryName) {
         var request = new XMLHttpRequest();
-        var tURL = "http://localhost:8888/ords/rest_data/testmodule/country/" + pCountryName;
+        var tURL = "http://localhost:8888/ords/orclpdb1/apex/rest_data/testmodule/country/" + pCountryName;
         request.open('GET', tURL, false);  // `false` makes the request synchronous
         request.send(null);
 
@@ -33,5 +34,9 @@
         return false;
     };
 
+    function plotData(pdata) {
+      var data = [pdata];
+      Plotly.newPlot('myDiv', data);
+    }
 
 </script>

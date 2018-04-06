@@ -1,0 +1,56 @@
+<head>
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div id="myDiv" style="width: 1024px; height: 768px;">"</div>
+<!--
+  <div id="myDiv" style="width: 480px; height: 400px;"></div>
+       Javascript function to be called from LiveCode
+       This function can be tested from Javascript Console in Chrome or Firefox loading this html page
+       and then in the console calling the function below with
+       plotData({x: ['giraffes', 'orangutans', 'monkeys'],y: [10, 30, 50],type: 'bar'});
+-->
+<script  type='text/javascript'>
+
+      function countryNames() {
+          var request = new XMLHttpRequest();
+          var tURL = "http://localhost:8888/ords/orclpdb1/apex/rest_data/testmodule/countrynames/";
+          request.open("GET", tURL, false);
+          request.setRequestHeader("Content-type","application/json");
+          request.send();
+
+          //alert(request.responseText);
+
+          if (request.status === 200) {
+              console.log(request.responseText);
+              return request.responseText;
+          };
+
+          return false;
+      };
+
+      function countryData(pCountryName) {
+          var request = new XMLHttpRequest();
+          var tURL = "http://localhost:8888/ords/orclpdb1/apex/rest_data/testmodule/country/" + pCountryName;
+          request.open("GET", tURL, false);  // `false` makes the request synchronous
+          request.setRequestHeader("Content-type","application/json");
+          request.send();
+
+          //alert(request.responseText);
+
+          if (request.status === 200) {
+              console.log(request.responseText);
+              return request.responseText;
+          };
+
+          return false;
+      };
+
+      function plotData(pdata) {
+        var data = [pdata];
+        Plotly.newPlot('myDiv', data);
+      }
+
+  </script>
+</body>
