@@ -3,7 +3,7 @@
    http://<node>:portno/ords/[<dbname>]/<rest_schema_name>/testmodule/country/[<code>]
 
    Parameters witin [] are optional depending on setup....
-   
+
    In all examples we use localhost as node and port 8888 is a forwarding port
    thru firewall. Node and portno may be different in your setup.
 
@@ -18,9 +18,9 @@
    To get the codes and names for all countries in the database use
 
    http://localhost:8888/ords/rest_data/testmodule/countrynames/
-   
+
    Finally: To get JSON payload for generating data for plotly.js
-   
+
    http://localhost:8888/ords/rest_data/testmodule/graph/Sweden
 
 */
@@ -55,8 +55,8 @@ BEGIN
     p_source_type    => ORDS.source_type_plsql,
     p_source         => 'BEGIN country_stats_pkg.country_data(:code); END;',
     p_items_per_page => 0);
-    
-    
+
+
   ORDS.define_template(
     p_module_name    => 'testmodule',
     p_pattern        => 'flag/:code');
@@ -93,6 +93,19 @@ BEGIN
       p_source_type   => ords.source_type_query,
       p_source        => 'SELECT country_graph_pkg.plotly_bar_graph(:code) FROM DUAL',
       p_items_per_page => 0);
+
+  ORDS.define_template(
+          p_module_name   => 'testmodule',
+          p_pattern       => 'graphlivecode/:code'
+        );
+
+  ORDS.define_handler(
+          p_module_name   => 'testmodule',
+          p_pattern       => 'graphlivecode/:code',
+          p_method        => 'GET',
+          p_source_type   => ords.source_type_query,
+          p_source        => 'SELECT country_graph_pkg.plot_livecode_graph(:code) FROM DUAL',
+          p_items_per_page => 0);
 
   COMMIT;
 
